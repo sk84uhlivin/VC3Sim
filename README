@@ -1,0 +1,64 @@
+Goal: Derive relative percent chance to obtain VC3 materials from Desert Housing Pit.
+
+Materials:
+Dented Metal Plate: 4
+Severed Cable: 3
+
+Circumstances:
+3 Fliers before Apartments (Taunt Chip)
+    - 8% chance for Plate
+    - Taunt
+        - 6% Taunt, 4% T+1, 2% T+2
+
+Pit Fight as Small Biped and Stubby
+    - Only Small Biped drops VC3 mats
+        - 80% Nothing
+        - 4% Dented Metal Plate
+        - 4% Severed Cable
+        - 6% Moving Speed Up
+            - 3% Speed Up
+            - 2% SU+1
+            - 1% SU+2
+        - 6% Shockwave
+            - 3% Shock
+            - 2% Shock+1
+            - 1% Shock+2
+    - Stubby
+        - 76% Nothing
+        - 8% Rusted Clump
+        - 8% Broken Key
+        - 2% Small Gear
+        - 6% Evade Range Up
+            - 3% EVU
+            - 2% EVU+1
+            - 1% EVU+2
+
+Amusement Park Flyer:
+    - Flyer
+        - 8% Dented Metal Plate
+        - 8% Rusty Bolt
+        - 12% Drop Rate Up
+            - 6% DRU
+            - 4% DRU+1
+            - 2% DRU+2
+
+*Items are autolooted after the fight, but only the last 10
+    - Counting items that players grab manually is VERY hard to account for
+
+*Items are duplicated upon autoloot
+
+
+
+TODO:
+1. Simulate the drop logic.
+    - Simulate percentages.
+    - Put results into a list.
+    - Slice off everything before the last 10 items.
+    - Duplicate drops from each run.
+    - Determine based on list if we got VC3 materials.
+
+2. Better Pit kill data.
+3. Possibly visualize the results
+    - Pie Chart
+    - Excel results
+4. VC3 + Taunt % calculation
