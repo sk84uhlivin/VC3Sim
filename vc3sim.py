@@ -32,17 +32,12 @@ amusement_flyer = {
     'dru_2' : [26, 27]
 }
 
+def vc3droplambda(x):
+    if "metal_plate" in x and "severed_cable" in x:
+        return x["metal_plate"] >= 4 and x["severed_cable"] >=3
+    return False
 
-def counter(list, param):
-    count = 0
-    for ele in list:
-        if ele == param:
-            count += 1
-    return count
-
-
-success = 0
-failure = 0
+runData = []
 
 runs = int(input("How many times do you want to run the simulation? "))
 
@@ -96,22 +91,20 @@ for r in range (1, runs+1):
 
     # Append pit and amusement drops to flyer drops.
     drops += drops1 + drops2
-    print(drops)
+    dropsDict = {}
+    for drop in drops:
+        if drop not in dropsDict:
+            dropsDict[drop] = 0
+        dropsDict[drop] += 1
 
-    metal_plate_c = counter(drops, 'metal_plate')
-    severed_cable_c = counter(drops, 'severed_cable')
+    runData.append(dropsDict)
 
-    print()
-    print(f"Dented Metal Plates: {metal_plate_c}")
-    print(f"Severed Cables: {severed_cable_c}")
-    print()
+# All runs that get VC3
+filteredRunData = list(filter(vc3droplambda, runData))
+filteredRunDataWithTaunt = list(filter(lambda t: "taunt" in t or "taunt_1" in t or "taunt_2" in t, filteredRunData))
 
-    if metal_plate_c >= 4 and severed_cable_c >= 3:
-        success += 1
-        print("You got VC3! :)")
-    else:
-        print("You didn't get VC3 :(")
-        failure += 1
+success = len(filteredRunData)
+failure = runs - success
 
 print()
 print("Results:")
@@ -121,9 +114,11 @@ print(f"Successes: {success}")
 print(f"Failures: {failure}")
 
 rate = round((success / runs * 100), 2)
+tauntRate = round((len(filteredRunDataWithTaunt) / runs * 100), 2)
 
 print()
 print(f"VC3 Success Rate: {rate} %")
+print(f"VC3 with Taunt Success Rate: {tauntRate} %")
 print()
 print(f"Attempts: {runs}")
 
